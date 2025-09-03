@@ -44,7 +44,6 @@ export default function Home() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center",
             maxWidth: "480px",
             gap: "32px",
           }}
@@ -205,6 +204,8 @@ export default function Home() {
               width: "100%",
               fontSize: "16px",
               cursor: "pointer",
+              position: "sticky",
+              bottom: 0,
             }}
           >
             Next
