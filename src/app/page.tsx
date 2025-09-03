@@ -106,27 +106,30 @@ export default function Home() {
             goal weight!
           </motion.p>
 
-          <motion.p
+          <motion.div
             initial={currentVariant.initial}
             animate={currentVariant.in}
             transition={{
               ...currentVariant.transition,
               delay: 0.4,
             }}
-            style={{
-              color: "#FFF",
-              fontFamily: "Syne",
-              fontSize: 16,
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "20px",
-              maxWidth: "480px",
-              opacity: 0.7,
-            }}
           >
-            Don&apos;t worry if you&apos;re unsure about how to answer a
-            question. We&apos;ll go over everything with you.
-          </motion.p>
+            <p
+              style={{
+                color: "#FFF",
+                fontFamily: "Syne",
+                fontSize: 16,
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "20px",
+                maxWidth: "480px",
+                opacity: 0.7,
+              }}
+            >
+              Don&apos;t worry if you&apos;re unsure about how to answer a
+              question. We&apos;ll go over everything with you.
+            </p>
+          </motion.div>
 
           <motion.div
             initial={currentVariant.initial}
@@ -205,7 +208,7 @@ export default function Home() {
               fontSize: "16px",
               cursor: "pointer",
               position: "sticky",
-              bottom: 0,
+              bottom: 10,
             }}
           >
             Next
