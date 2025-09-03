@@ -1,103 +1,214 @@
-import Image from "next/image";
+"use client";
+
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { animationVariants } from "./animations";
+import {
+  BackIcon,
+  LogoIcon,
+  ProgressBarIcon,
+  GraphIcon,
+  NextIcon,
+} from "./svgs";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [currentAnimation, setCurrentAnimation] = useState(0);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  useEffect(() => {
+    setCurrentAnimation(Math.floor(Math.random() * animationVariants.length));
+  }, []);
+
+  const currentVariant = animationVariants[currentAnimation];
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        width: "100%",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "linear-gradient(180deg, #B39FFE 0%, #725EBD 100%)",
+        padding: "32px 24px",
+        gap: "32px",
+        minHeight: "100dvh",
+      }}
+    >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentAnimation}
+          initial={currentVariant.initial}
+          animate={currentVariant.in}
+          transition={currentVariant.transition}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            maxWidth: "480px",
+            gap: "32px",
+          }}
+        >
+          {/* Header */}
+          <motion.div
+            initial={currentVariant.initial}
+            animate={currentVariant.in}
+            transition={{
+              ...currentVariant.transition,
+              delay: 0.1,
+            }}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              maxWidth: "480px",
+              width: "100%",
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <button className="cursor-pointer">
+              <BackIcon />
+            </button>
+
+            <div className="w-full flex-auto flex justify-center items-center">
+              <LogoIcon />
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={currentVariant.initial}
+            animate={currentVariant.in}
+            transition={{
+              ...currentVariant.transition,
+              delay: 0.2,
+            }}
           >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            <ProgressBarIcon />
+          </motion.div>
+
+          <motion.p
+            initial={currentVariant.initial}
+            animate={currentVariant.in}
+            transition={{
+              ...currentVariant.transition,
+              delay: 0.3,
+            }}
+            style={{
+              color: "#FFF",
+              fontFamily: "Syne",
+              fontSize: 32,
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "36px",
+              letterSpacing: -0.96,
+              maxWidth: "480px",
+            }}
+          >
+            Perfect! With your prescribed program, we will help you reach your
+            goal weight!
+          </motion.p>
+
+          <motion.p
+            initial={currentVariant.initial}
+            animate={currentVariant.in}
+            transition={{
+              ...currentVariant.transition,
+              delay: 0.4,
+            }}
+            style={{
+              color: "#FFF",
+              fontFamily: "Syne",
+              fontSize: 16,
+              fontStyle: "normal",
+              fontWeight: 400,
+              lineHeight: "20px",
+              maxWidth: "480px",
+              opacity: 0.7,
+            }}
+          >
+            Don&apos;t worry if you&apos;re unsure about how to answer a
+            question. We&apos;ll go over everything with you.
+          </motion.p>
+
+          <motion.div
+            initial={currentVariant.initial}
+            animate={currentVariant.in}
+            transition={{
+              ...currentVariant.transition,
+              delay: 0.5,
+            }}
+          >
+            <GraphIcon />
+          </motion.div>
+
+          <motion.div
+            initial={currentVariant.initial}
+            animate={currentVariant.in}
+            transition={{
+              ...currentVariant.transition,
+              delay: 0.6,
+            }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <p
+              style={{
+                color: "rgb(255, 255, 255)",
+                textAlign: "center",
+                fontFamily: "Syne",
+                fontSize: 16,
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "20px",
+                opacity: 0.7,
+              }}
+            >
+              On average, GLP-1 patients lost
+            </p>
+            <p
+              style={{
+                color: "#FFF",
+                fontFamily: "Syne",
+                fontSize: 16,
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "20px",
+              }}
+            >
+              18% of their body weight
+            </p>
+          </motion.div>
+
+          <motion.button
+            initial={currentVariant.initial}
+            animate={currentVariant.in}
+            transition={{
+              ...currentVariant.transition,
+              delay: 0.7,
+            }}
+            style={{
+              display: "flex",
+              padding: "12px 16px",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "10px",
+              borderRadius: "24px",
+              border: "1px solid rgba(255, 255, 255, 0.12)",
+              background: "white",
+              maxWidth: "480px",
+              width: "100%",
+              fontSize: "16px",
+              cursor: "pointer",
+            }}
+          >
+            Next
+            <NextIcon />
+          </motion.button>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }
