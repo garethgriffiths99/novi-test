@@ -136,6 +136,9 @@ export default function Home() {
               ...currentVariant.transition,
               delay: 0.5,
             }}
+            style={{
+              width: "100%",
+            }}
           >
             <GraphIcon />
           </motion.div>
